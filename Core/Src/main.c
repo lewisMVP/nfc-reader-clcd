@@ -1,21 +1,21 @@
 /* USER CODE BEGIN Header */
 /**
-  *******************************************************************************
+  ******************************************************************************
   * @file           : main.c
   * @brief          : Main program body
-  *******************************************************************************
+  ******************************************************************************
   * @attention
   *
   * This software is licensed under terms that can be found in the LICENSE file
   * in the root directory of this software component.
   * If no LICENSE file comes with this software, it is provided AS-IS.
   *
-  *******************************************************************************
+  ******************************************************************************
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "clcd.h" // Thêm thu vi?n LCD
+#include "clcd.h" // Include LCD library
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -42,7 +42,7 @@
 UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
-char nfcData[NFC_TAG_MAX_LEN]; // Luu d? li?u th? NFC
+char nfcData[NFC_TAG_MAX_LEN]; // Store NFC data
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -62,13 +62,15 @@ static void MX_USART1_UART_Init(void);
   * @brief  The application entry point.
   * @retval int
   */
-	void Error_Handler(void)
+void Error_Handler(void)
 {
   /* User can add his own implementation to report the HAL error return state */
   __disable_irq(); 
-  while (1){
+  while (1) {
+    // Loop indefinitely in case of error
   }
 }
+
 int main(void)
 {
   /* USER CODE BEGIN 1 */
@@ -82,35 +84,35 @@ int main(void)
   MX_USART1_UART_Init();
 
   /* USER CODE BEGIN 2 */
-  CLCD_Init();                           // Kh?i t?o LCD
-  CLCD_SetCursor(0, 0);                  // Ð?t con tr? t?i dòng 1
-  CLCD_WriteString("Waiting for NFC..."); // Hi?n th? tr?ng thái ch?
+  CLCD_Init();                           // Initialize LCD
+  CLCD_SetCursor(0, 0);                  // Set cursor to the first row
+  CLCD_WriteString("Waiting for NFC..."); // Display waiting message
   /* USER CODE END 2 */
 
   /* Infinite loop */
   while (1)
   {
     /* USER CODE BEGIN WHILE */
-    memset(nfcData, 0, NFC_TAG_MAX_LEN); // Xóa d? li?u cu trong buffer
+    memset(nfcData, 0, NFC_TAG_MAX_LEN); // Clear previous data in buffer
 
-    // Nh?n d? li?u t? UART
+    // Receive data from UART
     uartStatus = HAL_UART_Receive(&huart1, (uint8_t *)nfcData, NFC_TAG_MAX_LEN - 1, HAL_MAX_DELAY);
 
     if (uartStatus == HAL_OK)
     {
-      // Hi?n th? thông báo khi nh?n di?n du?c NFC
-      CLCD_Clear();                     // Xóa màn hình
-      CLCD_SetCursor(0, 0);             // Ð?t con tr? t?i dòng 1
-      CLCD_WriteString("NFC detected!"); // Hi?n th? thông báo
+      // Display message when NFC is detected
+      CLCD_Clear();                     // Clear screen
+      CLCD_SetCursor(0, 0);             // Set cursor to the first row
+      CLCD_WriteString("NFC detected!"); // Display NFC detected message
     }
     else
     {
-      // Hi?n th? l?i khi không nh?n du?c NFC
+      // Display error message if NFC is not detected
       CLCD_Clear();
       CLCD_SetCursor(0, 0);
       CLCD_WriteString("NFC Read Error!");
     }
-    HAL_Delay(1000); // Delay d? tránh tràn UART
+    HAL_Delay(1000); // Delay to prevent UART overflow
     /* USER CODE END WHILE */
   }
 }
