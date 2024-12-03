@@ -70,7 +70,7 @@ void Error_Handler(void)
     // Loop indefinitely in case of error
   }
 }
-CLCD_Name lcd1;
+
 int main(void)
 {
   /* USER CODE BEGIN 1 */
@@ -84,18 +84,9 @@ int main(void)
   MX_USART1_UART_Init();
 
   /* USER CODE BEGIN 2 */
-	CLCD_4BIT_Init(&lcd1, 16, 2,
-                 GPIOB, GPIO_PIN_3,  // RS
-                 GPIOB, GPIO_PIN_4,  // EN
-                 GPIOB, GPIO_PIN_5,  // D4
-                 GPIOB, GPIO_PIN_6,  // D5
-                 GPIOB, GPIO_PIN_7,  // D6
-                 GPIOB, GPIO_PIN_8); // D7
-  CLCD_SetCursor(&lcd1, 0, 0); // Set cursor to the first row
-  CLCD_WriteString(&lcd1, "System Ready");
   CLCD_Init();                           // Initialize LCD
   CLCD_SetCursor(0, 0);                  // Set cursor to the first row
-  CLCD_WriteString("Waiting for NFC...");
+  CLCD_WriteString("Waiting for NFC..."); // Display waiting message
   /* USER CODE END 2 */
 
   /* Infinite loop */

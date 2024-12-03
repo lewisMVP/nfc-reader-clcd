@@ -27,15 +27,11 @@ Project File Date:  12/03/2024
 <h2>Output:</h2>
 *** Using Compiler 'V6.14', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'nfc_reader1'
-../Core/Src/main.c(25): error: unknown type name 'CLCD_Name'
-CLCD_Name lcd1;
-^
-../Core/Src/main.c(87): warning: implicit declaration of function 'CLCD_4BIT_Init' is invalid in C99 [-Wimplicit-function-declaration]
-        CLCD_4BIT_Init(&lcd1, 16, 2,
-        ^
-1 warning and 1 error generated.
 compiling main.c...
-"nfc_reader1\nfc_reader1.axf" - 1 Error(s), 1 Warning(s).
+linking...
+Program Size: Code=5576 RO-data=324 RW-data=12 ZI-data=1748  
+FromELF: creating hex file...
+"nfc_reader1\nfc_reader1.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -59,8 +55,7 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE:5.4.0
       Include file:  CMSIS\Core\Include\tz_context.h
-Target not created.
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>
