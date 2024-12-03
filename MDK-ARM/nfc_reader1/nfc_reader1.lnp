@@ -1,9 +1,9 @@
 --cpu Cortex-M3
 "nfc_reader1\startup_stm32f103x6.o"
+"nfc_reader1\clcd.o"
 "nfc_reader1\main.o"
 "nfc_reader1\stm32f1xx_it.o"
 "nfc_reader1\stm32f1xx_hal_msp.o"
-"nfc_reader1\clcd.o"
 "nfc_reader1\stm32f1xx_hal_gpio_ex.o"
 "nfc_reader1\stm32f1xx_hal_i2c.o"
 "nfc_reader1\stm32f1xx_hal.o"
